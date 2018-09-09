@@ -14,6 +14,10 @@
 		16AECD162144020300BF70E7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 16AECD152144020300BF70E7 /* Assets.xcassets */; };
 		16AECD192144020300BF70E7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 16AECD172144020300BF70E7 /* LaunchScreen.storyboard */; };
 		16AECD2121441FC100BF70E7 /* Box.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16AECD2021441FC100BF70E7 /* Box.swift */; };
+		16C8E9F62144D67F00221040 /* Cursor.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C8E9F52144D67F00221040 /* Cursor.png */; };
+		16C8E9FA214535C300221040 /* ringbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C8E9F9214535C300221040 /* ringbutton.png */; };
+		16C8E9FC2145366200221040 /* redbutton.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C8E9FB2145366200221040 /* redbutton.png */; };
+		16C8E9FE21453B7F00221040 /* graphic.png in Resources */ = {isa = PBXBuildFile; fileRef = 16C8E9FD21453B7F00221040 /* graphic.png */; };
 		86A698CF2144ACA900A485FA /* gearthing1.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 86A698CE2144ACA900A485FA /* gearthing1.PNG */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +31,10 @@
 		16AECD182144020300BF70E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		16AECD1A2144020300BF70E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		16AECD2021441FC100BF70E7 /* Box.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Box.swift; sourceTree = "<group>"; };
+		16C8E9F52144D67F00221040 /* Cursor.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Cursor.png; path = ../../../Desktop/Cursor.png; sourceTree = "<group>"; };
+		16C8E9F9214535C300221040 /* ringbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ringbutton.png; sourceTree = "<group>"; };
+		16C8E9FB2145366200221040 /* redbutton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = redbutton.png; sourceTree = "<group>"; };
+		16C8E9FD21453B7F00221040 /* graphic.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = graphic.png; sourceTree = "<group>"; };
 		86A698CE2144ACA900A485FA /* gearthing1.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gearthing1.PNG; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -64,11 +72,15 @@
 				16AECD0E2144020100BF70E7 /* art.scnassets */,
 				16AECD102144020100BF70E7 /* ViewController.swift */,
 				16AECD122144020100BF70E7 /* Main.storyboard */,
+				16C8E9F9214535C300221040 /* ringbutton.png */,
+				16C8E9FB2145366200221040 /* redbutton.png */,
 				16AECD152144020300BF70E7 /* Assets.xcassets */,
 				16AECD172144020300BF70E7 /* LaunchScreen.storyboard */,
 				16AECD1A2144020300BF70E7 /* Info.plist */,
 				16AECD2021441FC100BF70E7 /* Box.swift */,
 				86A698CE2144ACA900A485FA /* gearthing1.PNG */,
+				16C8E9F52144D67F00221040 /* Cursor.png */,
+				16C8E9FD21453B7F00221040 /* graphic.png */,
 			);
 			path = SpeedAR;
 			sourceTree = "<group>";
@@ -132,10 +144,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				16AECD0F2144020100BF70E7 /* art.scnassets in Resources */,
+				16C8E9F62144D67F00221040 /* Cursor.png in Resources */,
 				16AECD192144020300BF70E7 /* LaunchScreen.storyboard in Resources */,
+				16C8E9FA214535C300221040 /* ringbutton.png in Resources */,
 				16AECD162144020300BF70E7 /* Assets.xcassets in Resources */,
 				16AECD142144020100BF70E7 /* Main.storyboard in Resources */,
 				86A698CF2144ACA900A485FA /* gearthing1.PNG in Resources */,
+				16C8E9FE21453B7F00221040 /* graphic.png in Resources */,
+				16C8E9FC2145366200221040 /* redbutton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

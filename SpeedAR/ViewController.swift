@@ -14,6 +14,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
 
     @IBOutlet var sceneView: ARSCNView!
     @IBOutlet weak var statusTextView: UITextView!
+    @IBOutlet weak var toggleButton: UIButton!
     
     var box: Box!
     var status: String!
@@ -25,6 +26,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var averageVelocity: Float!
     var trackingState: ARCamera.TrackingState!
     var initial: Bool!
+    var buttonOn: Bool!
     enum Mode {
         case waitingForMeasuring
         case measuring
@@ -47,11 +49,21 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         }
     }
     
-    @IBAction func switchChanged(_ sender: UISwitch) {
-        if sender.isOn {
+    @IBAction func switchChanged(_ sender: UIButton) {
+        if !buttonOn {
+            buttonOn = true
+            DispatchQueue.main.async {
+                let image = UIImage(named: "redbutton.png") as UIImage?
+                self.toggleButton.setImage(image, for: .normal)
+            }
             mode = .measuring
             startTime = Date()
         } else {
+            buttonOn = false
+            DispatchQueue.main.async {
+                let image = UIImage(named: "ringbutton.png") as UIImage?
+                self.toggleButton.setImage(image, for: .normal)
+            }
             mode = .waitingForMeasuring
             let time = Date().timeIntervalSince(startTime)
             averageVelocity = (distance / Float(time)) * 3.6
@@ -81,10 +93,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         averageVelocity = 0.0
         
-        setStatusText()
+        buttonOn = false
         
-        // Show statistics such as fps and timing information
-        sceneView.showsStatistics = true
+        statusTextView.layer.cornerRadius = 20
+                
+        setStatusText()
         
         _ = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(calculateVelocity), userInfo: nil, repeats: true)
     }
@@ -95,7 +108,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Create a session configuration
         let configuration = ARWorldTrackingConfiguration()
         
-        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
+        sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints]
         
         configuration.planeDetection = [.horizontal, .vertical]
 
