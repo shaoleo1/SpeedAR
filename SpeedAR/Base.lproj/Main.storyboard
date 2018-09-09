@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -36,6 +37,17 @@
                                     <action selector="switchChanged:" destination="BV1-FR-VrT" eventType="valueChanged" id="yzm-eT-OC4"/>
                                 </connections>
                             </switch>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cLb-jW-PZU">
+                                <rect key="frame" x="29" y="579" width="45" height="45"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="45" id="3AC-ZP-pGI"/>
+                                    <constraint firstAttribute="height" constant="45" id="F0j-jj-Xh1"/>
+                                    <constraint firstAttribute="width" secondItem="cLb-jW-PZU" secondAttribute="height" multiplier="1:1" id="fal-HI-MGR"/>
+                                </constraints>
+                                <state key="normal" image="gearthing1.PNG" backgroundImage="gearthing1.PNG">
+                                    <attributedString key="attributedTitle"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -43,8 +55,10 @@
                             <constraint firstItem="kjH-3e-7dd" firstAttribute="bottom" secondItem="r4P-eK-k8S" secondAttribute="bottom" constant="-50" id="A01-ZW-QYW"/>
                             <constraint firstItem="JoQ-0B-fYs" firstAttribute="leading" secondItem="r4P-eK-k8S" secondAttribute="leading" id="B0X-I6-5X9"/>
                             <constraint firstItem="kjH-3e-7dd" firstAttribute="centerX" secondItem="r4P-eK-k8S" secondAttribute="centerX" id="DBJ-qd-KhH"/>
+                            <constraint firstItem="MVO-ux-Rgc" firstAttribute="bottom" secondItem="cLb-jW-PZU" secondAttribute="bottom" constant="43" id="J0b-Pn-TDp"/>
                             <constraint firstItem="r4P-eK-k8S" firstAttribute="top" secondItem="JoQ-0B-fYs" secondAttribute="bottom" constant="-148" id="Yu9-e5-Tuw"/>
                             <constraint firstItem="JoQ-0B-fYs" firstAttribute="trailing" secondItem="r4P-eK-k8S" secondAttribute="trailing" id="a9U-7u-5N9"/>
+                            <constraint firstItem="cLb-jW-PZU" firstAttribute="leading" secondItem="MVO-ux-Rgc" secondAttribute="leading" constant="29" id="eoC-oA-rAL"/>
                             <constraint firstAttribute="bottom" secondItem="r4P-eK-k8S" secondAttribute="bottom" id="gbS-Ho-3du"/>
                             <constraint firstItem="r4P-eK-k8S" firstAttribute="leading" secondItem="asV-YE-uxn" secondAttribute="leading" id="jxp-KM-g9I"/>
                             <constraint firstAttribute="top" secondItem="r4P-eK-k8S" secondAttribute="top" id="qTz-Ii-6oz"/>
@@ -61,4 +75,7 @@
             <point key="canvasLocation" x="136.80000000000001" y="124.58770614692655"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="gearthing1.PNG" width="512" height="512"/>
+    </resources>
 </document>
