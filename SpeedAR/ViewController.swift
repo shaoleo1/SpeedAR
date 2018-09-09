@@ -19,7 +19,12 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     var status: String!
     var startPosition: SCNVector3!
     var distance: Float!
+    var startTime: Date!
+    var lastDistance: Float!
+    var velocity: Float!
+    var averageVelocity: Float!
     var trackingState: ARCamera.TrackingState!
+    var initial: Bool!
     enum Mode {
         case waitingForMeasuring
         case measuring
@@ -35,6 +40,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                 box.isHidden = false
                 startPosition = nil
                 distance = 0.0
+                velocity = 0.0
+                averageVelocity = 0.0
                 setStatusText()
             }
         }
@@ -43,8 +50,11 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     @IBAction func switchChanged(_ sender: UISwitch) {
         if sender.isOn {
             mode = .measuring
+            startTime = Date()
         } else {
             mode = .waitingForMeasuring
+            let time = Date().timeIntervalSince(startTime)
+            averageVelocity = (distance / Float(time)) * 3.6
         }
     }
     
@@ -67,11 +77,16 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         distance = 0.0
         
+        velocity = 0.0
+        
+        averageVelocity = 0.0
+        
         setStatusText()
         
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
+        _ = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(calculateVelocity), userInfo: nil, repeats: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,7 +97,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         
         sceneView.debugOptions = [ARSCNDebugOptions.showFeaturePoints, ARSCNDebugOptions.showWorldOrigin]
         
-        configuration.planeDetection = .horizontal
+        configuration.planeDetection = [.horizontal, .vertical]
 
         // Run the view's session
         sceneView.session.run(configuration)
@@ -133,7 +148,9 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func setStatusText() {
         var text = "Status: \(status!)\n"
         text += "Tracking: \(getTrackingDescription())\n"
-        text += "Distance: \(String(format:"%.2f cm", distance! * 100.0))"
+        text += "Distance: \(String(format:"%.2f cm", distance! * 100.0))\n"
+        text += "Velocity: \(String(format:"%.2f km/h", velocity!))\n"
+        text += "Average Velocity: \(String(format:"%.2f km/h", averageVelocity!))"
         statusTextView.text = text
     }
     
@@ -220,4 +237,45 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         return atan2(z, x)
     }
     
+    @objc func calculateVelocity() {
+        if let lastDistance = distance {
+            let screenCenter : CGPoint = CGPoint(
+                x: self.sceneView.bounds.midX, y: self.sceneView.bounds.midY)
+            let planeTestResults = sceneView.hitTest(
+                screenCenter, types: [.existingPlaneUsingExtent])
+            if let result = planeTestResults.first {
+                status = "READY"
+                if mode == .measuring {
+                    status = "MEASURING"
+                    let worldPosition = SCNVector3Make(
+                        result.worldTransform.columns.3.x,
+                        result.worldTransform.columns.3.y,
+                        result.worldTransform.columns.3.z
+                    )
+                    if startPosition == nil {
+                        startPosition = worldPosition
+                        box.position = worldPosition
+                    }
+                    distance = calculateDistance(
+                        from: startPosition!, to: worldPosition
+                    )
+                    velocity = ((distance - lastDistance) / 0.2) * 18
+                    print("Distance: \(distance)")
+                    print("Velocity: \(velocity)")
+                    box.resizeTo(extent: distance)
+                    let angleInRadians = calculateAngleInRadians(
+                        from: startPosition!, to: worldPosition
+                    )
+                    box.rotation = SCNVector4(x: 0, y: 1, z: 0,
+                                              w: -(angleInRadians + Float.pi)
+                    )
+                }
+            } else {
+                status = "NOT READY"
+            }
+            DispatchQueue.main.async {
+                self.setStatusText()
+            }
+        }
+    }
 }
