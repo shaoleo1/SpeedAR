@@ -86,7 +86,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
         // Show statistics such as fps and timing information
         sceneView.showsStatistics = true
         
-        _ = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(calculateVelocity), userInfo: nil, repeats: true)
+        _ = Timer.scheduledTimer(timeInterval: 1/60, target: self, selector: #selector(calculateVelocity), userInfo: nil, repeats: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -183,10 +183,7 @@ class ViewController: UIViewController, ARSCNViewDelegate {
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         // Call the method asynchronously to perform
         //  this heavy task without slowing down the UI
-        DispatchQueue.main.async {
-            self.measure()
-            self.setStatusText()
-        }
+
     }
     
     func measure() {
@@ -259,7 +256,8 @@ class ViewController: UIViewController, ARSCNViewDelegate {
                     distance = calculateDistance(
                         from: startPosition!, to: worldPosition
                     )
-                    velocity = ((distance - lastDistance) / 0.2) * 18
+                    print("\(distance) - \(lastDistance)")
+                    velocity = (distance - lastDistance) * 216
                     print("Distance: \(distance)")
                     print("Velocity: \(velocity)")
                     box.resizeTo(extent: distance)
